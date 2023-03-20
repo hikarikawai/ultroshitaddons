@@ -10,6 +10,8 @@
 
 • `{i}kill`
 • `{i}fp`
+• `{i}xaintro`
+• `{i}run
 
 """
 
@@ -44,3 +46,37 @@ async def _(event):
 @ultroid_cmd(pattern="fp$")
 async def a(e):
     await e.eor("🤦‍♂")
+
+#Credit To @JustRex
+
+@ultroid_cmd(pattern="run")
+async def naruto(ult):
+ await ult.edit("Saatnya untuk bilang")
+ await asyncio.sleep(1)
+ await ult.edit("R")
+ await asyncio.sleep(0.5)
+ await ult.edit("RU")
+ await asyncio.sleep(0.5)
+ await ult.edit("RUN")
+ await asyncio.sleep(0.5)
+ await ult.edit("RUN.")
+ await asyncio.sleep(0.5)
+ await ult.edit("RUN..")
+ await asyncio.sleep(0.5)
+ await ult.edit("RUN...")
+ await asyncio.sleep(0.5)
+ await ult.edit("RUN....")
+ await asyncio.sleep(2)
+ await ult.edit("RUN!!!!")
+
+@ultroid_cmd(pattern="xaintro")
+async def naruto(ult):
+ await ult.edit("Hallo semua!")
+ await asyncio.sleep(1)
+ await ult.edit("kenalin nama gua Rexa")
+ await asyncio.sleep(3)
+ await ult.edit("Udah itu aja sih wkwkw")
+ await asyncio.sleep(2)
+ await ult.edit("Gua mau ngasih Emot ini liat nih")
+ await asyncio.sleep(3)
+ await ult.edit("🖕🏻")
