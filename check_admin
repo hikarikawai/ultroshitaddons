@@ -1,0 +1,60 @@
+# made by eris. for [ultroid]
+# exclusive for @ testingpluginnn
+
+
+""" 
+Commands Available -
+
+•  {i}me_admin  </>
+ Daftar semua Obrolan di mana Anda adalah Admin.
+
+ tip: gunakan [ `{i}me_admin pv` ] untuk mengirim filee
+        dalam pesan tersimpan Anda.
+"""
+
+import asyncio
+import os
+
+from . import *
+
+
+@ultroid_cmd(pattern="me_admin ?(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    here = event.chat_id
+    args = event.pattern_match.group(1)
+    e1 = await eor(event, "`Processing...`")
+    admin_list = []
+    dialogue = await ultroid_bot.get_dialogs()
+    for dialog in dialogue:
+        if dialog.is_group or dialog.is_channel:
+            ids = await ultroid_bot.get_entity(dialog)
+            try:
+                if ids.admin_rights or ids.creator:
+                    info = f"{ids.id}:  {ids.title}"
+                    admin_list.append(info)
+            except BaseException:
+                pass
+            except Exception:
+                continue
+
+    if len(admin_list) > 0:
+        await e1.edit('`Done, Now Creating a File 🖨️`')
+        with open('me_admin.txt', 'w') as book:
+            for groups_channels in admin_list:
+                book.write(groups_channels + '\n')
+        await asyncio.sleep(1)
+        caption = f'List of Chats Where I have Admin Rights [total: {len(admin_list)}]'
+        if args and "pv" in args:
+            await ultroid_bot.send_file("me", "me_admin.txt", caption=caption)
+            await e1.respond("`File sent to your Saved Message`")
+        else:
+            await ultroid_bot.send_file(here, "me_admin.txt", caption=caption)
+        os.remove("me_admin.txt")
+        await e1.delete()
+    else:
+        await e1.edit("`Sed, I'm not Admin anywhere 🤧`")
+
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
